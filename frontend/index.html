@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title>Hi!, I am Rawkush</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/css.css')}}">
+    <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/fontawesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/heart-icon" href="https://img.icons8.com/color/48/000000/bot1.png" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ </head>
+    <body style="background-color:cyan;">
+        <div class="im">
+        </div>
+        <div class="container">
+            <h1>CHAT BOT SONG RECOMMENDER SYSTEM</h1><br><br>
+            <div class="row">
+                <div class="text-center hd1" class="col-md-5">
+                    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottieplayer.js"></script>
+                    <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_3BmVPt.json" background="transparent" speed="1" style="width: 400px; height: 300px;" loop autoplay></lottie-player>
+                    <div class="footer">
+                        <span class="foo-txt"><br><font color="White"> </font></span>
+                    </div>
+                </div>
+                <div class="boxed" class="col-md-7">
+                    <h1></h1>
+                    <div id="chatbox">
+                        <a class="navbar-brand" href="/upload">Emotion</a>
+                        <p class="botText">
+                            <span> Hi! I'm GEC Assistant</span>
+                        </p>
+                    </div>
+                    <div id="userInput">
+                        <input id="textInput" type="text" name="msg" placeholder=" Ask a question "size="90" />
+                    </div>
+                    <script>
+                        function getBotResponse() {
+                        var rawText = $("#textInput").val();
+                        var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+                        $("#textInput").val("");
+                        $("#chatbox").append(userHtml);
+                        document.getElementById("userInput").scrollIntoView({
+                            block: "start",
+                            behavior: "smooth"
+                        });
+                        $.get("/get", {
+                            msg: rawText
+                        }).done(function (data) {
+                            var botHtml = '<p class="botText"><span>' + data + "</span></p>";
+                            $("#chatbox").append(botHtml);
+                            document
+                            .getElementById("userInput")
+                            .scrollIntoView({
+                                block: "start",
+                                behavior: "smooth"
+                            });
+                        });
+                        }
+                        $("#textInput").keypress(function (e) {
+                            if (e.which == 13) {
+                                getBotResponse();
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <!--container end-->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script type=text/javascript src="{{url_for('static', filename='js/main.js') }}"></script>
+        <script type=text/javascript src="{{url_for('static', filename='js/jquery.blast.min.js') }}"></script>
+    </body>
+ </html>
